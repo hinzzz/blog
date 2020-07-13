@@ -1,12 +1,12 @@
 ## 简介
 
-[开源个人博客系统](https://github.com/iszhouhua/blog)的后台前端部分代码。项目基于 [vue](https://github.com/vuejs/vue) 和 [element](https://github.com/ElemeFE/element)，以[vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)为模板完成开发。
+[开源个人博客系统](https://github.com/hinz/blog)的后台前端部分代码。项目基于 [vue](https://github.com/vuejs/vue) 和 [element](https://github.com/ElemeFE/element)，以[vue-admin-template](https://github.com/PanJiaChen/vue-admin-template)为模板完成开发。
 
 ## 开发
 
 ```bash
 # 克隆项目
-git clone https://github.com/iszhouhua/blog.git
+git clone https://github.com/hinz/blog.git
 
 # 进入项目目录
 cd blog/vue
@@ -50,16 +50,16 @@ location /admin {
 
 ## 界面展示
 
-![20190508101138](http://img.iszhouhua.com/printscreen/20190508101138.png)
+![20190508101138](http://img.hinz.com/printscreen/20190508101138.png)
 
-![20190508101254](http://img.iszhouhua.com/printscreen/20190508101254.png)
+![20190508101254](http://img.hinz.com/printscreen/20190508101254.png)
 
-![20190508101400](http://img.iszhouhua.com/printscreen/20190508101400.png)
+![20190508101400](http://img.hinz.com/printscreen/20190508101400.png)
 
-![20190508101440](http://img.iszhouhua.com/printscreen/20190508101440.png)
+![20190508101440](http://img.hinz.com/printscreen/20190508101440.png)
 
-![20190508101544](http://img.iszhouhua.com/printscreen/20190508101544.png)
+![20190508101544](http://img.hinz.com/printscreen/20190508101544.png)
 
-![20190508101622](http://img.iszhouhua.com/printscreen/20190508101622.png)
+![20190508101622](http://img.hinz.com/printscreen/20190508101622.png)
 
 ------

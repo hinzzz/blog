@@ -5,7 +5,7 @@
 
 技术栈：SpringBoot、Thymeleaf、MySQL、MyBatis-Plus、Lombok、Gson、ehcache、validation、Bootstrap、jQuery、FontAwesome、Jsoup……
 
-示例博客：[周华个人博客](https://www.iszhouhua.com)
+示例博客：[周华个人博客](https://www.hinz.com)
 
 ## 快速开始
 
@@ -60,29 +60,29 @@ clean package war:war -Dmaven.test.skip=true
 后台管理
 --------
 
-后台采用前后端分离的方式实现，源码位于vue文件夹下<https://github.com/iszhouhua/blog/tree/master/vue>
+后台采用前后端分离的方式实现，源码位于vue文件夹下<https://github.com/hinz/blog/tree/master/vue>
 
 ------
 
 ## 界面展示
 
-![1557279251039](http://img.iszhouhua.com/printscreen/20190508093436.png)
+![1557279251039](http://img.hinz.com/printscreen/20190508093436.png)
 
-![20190508095012](http://img.iszhouhua.com/printscreen/20190508095012.png)
+![20190508095012](http://img.hinz.com/printscreen/20190508095012.png)
 
-![20190508095714](http://img.iszhouhua.com/printscreen/20190508095714.png)
+![20190508095714](http://img.hinz.com/printscreen/20190508095714.png)
 
-![20190508101138](http://img.iszhouhua.com/printscreen/20190508101138.png)
+![20190508101138](http://img.hinz.com/printscreen/20190508101138.png)
 
-![20190508101254](http://img.iszhouhua.com/printscreen/20190508101254.png)
+![20190508101254](http://img.hinz.com/printscreen/20190508101254.png)
 
-![20190508101400](http://img.iszhouhua.com/printscreen/20190508101400.png)
+![20190508101400](http://img.hinz.com/printscreen/20190508101400.png)
 
-![20190508101440](http://img.iszhouhua.com/printscreen/20190508101440.png)
+![20190508101440](http://img.hinz.com/printscreen/20190508101440.png)
 
-![20190508101544](http://img.iszhouhua.com/printscreen/20190508101544.png)
+![20190508101544](http://img.hinz.com/printscreen/20190508101544.png)
 
-![20190508101622](http://img.iszhouhua.com/printscreen/20190508101622.png)
+![20190508101622](http://img.hinz.com/printscreen/20190508101622.png)
 
 ## 2019.5.1 
 

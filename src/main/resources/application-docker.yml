@@ -12,5 +12,5 @@ logging:
   file: logs/blog.log
   level:
     com:
-      iszhouhua:
+      hinz:
         blog: info
