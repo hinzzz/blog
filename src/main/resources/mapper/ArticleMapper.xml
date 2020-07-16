@@ -36,7 +36,10 @@
   </select>
 
   <select id="selectArticleList" resultMap="BaseResultMap">
-    SELECT a.id,a.title,a.description,a.is_top,a.image,a.create_time,a.url,b.name AS category_name,b.url AS category_url FROM blog_article a LEFT JOIN blog_category b ON a.category_id=b.id WHERE a.status=1 and a.type = 0
+    SELECT a.id,a.title,a.description,a.is_top,a.image,a.create_time,a.url,a.visits,b.name AS category_name,b.url AS category_url
+    FROM blog_article a
+    LEFT JOIN blog_category b ON a.category_id=b.id
+    WHERE a.status=1 and a.type = 0
       <if test="keyword == null">
         AND a.is_top=FALSE
       </if>
