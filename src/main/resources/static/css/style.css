@@ -1504,6 +1504,9 @@ ul.pills-gal li a:hover {
 #comments-template .comments-container.comments-root-container .comments-comments-container.comment-list > li .comment-body {
     position: relative
 }
+.children-reply{
+    padding-left: 45px;
+}
 
 #comments-template .comments-container.comments-root-container .comments-comments-container.comment-list > li .comment-body .comment-meta {
     position: relative;

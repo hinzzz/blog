@@ -71,22 +71,23 @@
                        th:text="${tag.name}"></a>
                 </div>
             </footer>
+            <div class="previous-next-links">
+                <div class="previous-design-link" th:if="${previousArticle}">
+                    <a th:href="'/'+${previousArticle.url}+'.html'" rel="prev" th:title="${previousArticle.title}">
+                        <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
+                        [[${previousArticle.title}]]
+                    </a>
+                </div>
+                <div class="next-design-link" th:if="${nextArticle}">
+                    <a th:href="'/'+${nextArticle.url}+'.html'" rel="next" th:title="${nextArticle.title}">
+                        [[${nextArticle.title}]]
+                        <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </article>
-    <div class="previous-next-links">
-        <div class="previous-design-link" th:if="${previousArticle}">
-            <a th:href="'/'+${previousArticle.url}+'.html'" rel="prev" th:title="${previousArticle.title}">
-                <i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i>
-                [[${previousArticle.title}]]
-            </a>
-        </div>
-        <div class="next-design-link" th:if="${nextArticle}">
-            <a th:href="'/'+${nextArticle.url}+'.html'" rel="next" th:title="${nextArticle.title}">
-                [[${nextArticle.title}]]
-                <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i>
-            </a>
-        </div>
-    </div>
+
     <th:block th:if="${info.isComment}">
         <div layout:replace="~{common/comment}"></div>
     </th:block>

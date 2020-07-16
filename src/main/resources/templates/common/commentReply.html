@@ -1,0 +1,49 @@
+
+<div id="commentReply" th:fragment="commentFragment(replys,authorName)">
+<article   th:unless="${#lists.isEmpty(replys)}">
+  <article class="comment-body comment-children children-reply"  th:each="reply,replyStat:${replys}">
+    <footer class="comment-meta">
+      <div class="comment-author vcard">
+        <img th:src="'https://secure.gravatar.com/avatar/'+${reply.emailMd5}" width="44"
+             height="44">
+        <b class="fn" th:text="${reply.author}"></b>
+        回复 <b class="fn" th:text="${authorName}"></b>
+        <span class="says">说：</span>
+      </div>
+      <div class="comment-metadata">
+        <time th:datetime="${reply.createTime}"
+              th:text="${#dates.format(reply.createTime,'yyyy年MM月dd日 HH:mm:ss')}"></time>
+      </div>
+    </footer>
+    <div class="comment-content">
+      <p th:utext="${reply.content}"></p>
+    </div>
+    <div class="reply"><button class="comment-reply-link">回复  </button></div>
+
+    <article th:unless="${#lists.isEmpty(reply.comments)}" th:include="common/commentReply :: commentFragment(replys=${reply.comments},authorName=${reply.author})"></article>
+  </article>
+
+</article>
+
+</div>
+
+
+
+<div th:fragment="commentReplyFragment(articleId,parentId)">
+  <div class="comments-editor-container" id="comment-container">
+    <form action="comment/article" method="post" id="commentform" class="comment-form form-inline" target="_self">
+      <div class="comments-editor-write-field">
+        <input type="hidden" id="articleId" name="articleId" th:value="${articleId}"/>
+        <input type="hidden"  name="parentId" th:value="${parentId}"/>
+        <textarea class="comments-editor-write-field" id="content" placeholder="你的评论可以一针见血！"
+                  name="content" cols="45" rows="5"
+                  aria-required="true"></textarea>
+      </div>
+      <div id="loading" style="display: none;"><i class="fa fa-spinner fa-spin"></i> 正在提交, 请稍候...
+      </div>
+      <p class="form-submit">
+        <input type="submit" id="comment-submit" class="comments-editor-submit" value="发表评论">
+      </p>
+    </form>
+  </div>
+</div>

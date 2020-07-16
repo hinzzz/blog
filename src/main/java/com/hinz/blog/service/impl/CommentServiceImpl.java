@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -29,25 +30,34 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public IPage<Comment> findPageByArticleId(Page<Comment> page,Long articleId) {
-        IPage<Comment> commentPage=baseMapper.selectPage(page,new QueryWrapper<Comment>().eq("article_id",articleId).eq("status", CommentStatusEnum.PUBLISHED.getValue()).orderByDesc("id"));
+        IPage<Comment> commentPage=baseMapper.selectPage(page,new QueryWrapper<Comment>().eq("article_id",articleId)
+                .eq("status", CommentStatusEnum.PUBLISHED.getValue()).eq("parent_id",0).orderByDesc("create_time"));
+
+        List<Comment> allComments = baseMapper.selectList(new QueryWrapper<Comment>().eq("article_id", articleId)
+                .eq("status", CommentStatusEnum.PUBLISHED.getValue()));
         //获得所有引用评论
-        commentPage.getRecords().forEach(comment -> {
-            //只要parentId大于0，就表示存在引用评论
-            List<Comment> replyList=new ArrayList<>();
-            long parentId=comment.getParentId();
-            while (parentId>0){
-                Comment reply=baseMapper.selectById(parentId);
-                if(reply!=null){
-                    replyList.add(reply);
-                    parentId=reply.getParentId();
-                }else{
-                    parentId=0;
-                }
+
+        if(commentPage.getRecords()!=null && commentPage.getRecords().size()>0){
+            for (Comment comment : commentPage.getRecords()) {
+                comment.setComments(getReplyComments(comment,allComments));
             }
-            comment.setComments(replyList);
-        });
+        }
+
         return commentPage;
     }
+
+    private List<Comment> getReplyComments(Comment rootComment,List<Comment> allComments) {
+        List<Comment> replyComments = allComments.stream().filter(entity ->
+                entity.getParentId().intValue() == rootComment.getId().intValue())
+                .map(replyComment -> {
+                    replyComment.setComments(getReplyComments(replyComment, allComments));
+                    return replyComment;
+                }).sorted((c1, c2) -> {
+                    return (c1.getCreateTime() == null ? 0 : c1.getCreateTime().getTimezoneOffset()) - (c2.getCreateTime() == null ? 0 : c2.getCreateTime().getTimezoneOffset());
+                }).collect(Collectors.toList());
+        return replyComments;
+    }
+
 
     @Override
     @Cacheable(key = "targetClass + methodName + #p0 + #p1")
