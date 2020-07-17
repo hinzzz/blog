@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
  * @author hinz
  * @date 2020-07-13
  */
-@RestController
+@Controller
 public class IndexController extends BaseController {
 
     @Autowired
@@ -74,6 +75,7 @@ public class IndexController extends BaseController {
      * 文章详情页
      * @return
      */
+    @ResponseBody
     @GetMapping("{url}.html")
     public R index(Model model, @PathVariable(value = "url") String url) {
         Article info=articleService.findArticleByUrl(url);
