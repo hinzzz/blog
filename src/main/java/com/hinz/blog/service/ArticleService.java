@@ -3,7 +3,9 @@ package com.hinz.blog.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hinz.blog.common.util.R;
 import com.hinz.blog.model.Article;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -82,4 +84,26 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     List<Article> findLatestArticle(int number);
+
+
+    /**
+     *  更新评论数
+     * @param articleId
+     * @return
+     */
+    int updateForCommentsById(Long articleId);
+
+    /**
+     * 点赞
+     * @param articleId
+     * @return
+     */
+    int likes(Integer articleId,Integer operFlag);
+
+    /**
+     * 收藏
+     * @param articleId
+     * @return
+     */
+    int collects(Integer articleId,Integer operFlag);
 }

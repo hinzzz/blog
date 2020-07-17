@@ -80,4 +80,38 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return baseMapper.selectLatestArticle(number);
     }
 
+    @Override
+    public int updateForCommentsById(Long articleId) {
+        return baseMapper.updateForCommentsById(articleId);
+    }
+
+    @Override
+    public int likes(Integer articleId,Integer operFlag) {
+        //TODO 增加到用户的点赞列
+        if(operFlag!=null){
+            int oper = 0;
+            if(operFlag==0){
+                oper = -1;
+            }else if(operFlag==1){
+                oper = 1;
+            }
+            return baseMapper.likes(articleId,oper);
+        }
+        return 0;
+}
+
+    @Override
+    public int collects(Integer articleId,Integer operFlag) {
+        //TODO 增加到用户的收藏列
+        if(operFlag!=null){
+            int oper = 0;
+            if(operFlag==0){
+                oper = -1;
+            }else if(operFlag==1){
+                oper = 1;
+            }
+            return baseMapper.collects(articleId,oper);
+        }
+        return 0;
+    }
 }

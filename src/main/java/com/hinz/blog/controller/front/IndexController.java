@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.common.constant.CodeEnum;
 import com.hinz.blog.common.constant.Const;
 import com.hinz.blog.common.exception.BlogException;
+import com.hinz.blog.common.util.R;
 import com.hinz.blog.model.enums.ArticleTypeEnum;
 import com.hinz.blog.model.enums.LinkTypeEnum;
 import com.hinz.blog.service.LinkService;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,7 +26,7 @@ import java.util.List;
  * @author hinz
  * @date 2020-07-13
  */
-@Controller
+@RestController
 public class IndexController extends BaseController {
 
     @Autowired
@@ -73,7 +75,7 @@ public class IndexController extends BaseController {
      * @return
      */
     @GetMapping("{url}.html")
-    public String index(Model model, @PathVariable(value = "url") String url) {
+    public R index(Model model, @PathVariable(value = "url") String url) {
         Article info=articleService.findArticleByUrl(url);
         if(null==info){
             throw new BlogException(CodeEnum.NOT_FOUND.getValue(),"文章不存在："+url);
@@ -89,10 +91,7 @@ public class IndexController extends BaseController {
         model.addAttribute("previousArticle",previousArticle);
         Article nextArticle=articleService.findNextById(info.getId());
         model.addAttribute("nextArticle",nextArticle);
-        //自定义文章
-        if(ArticleTypeEnum.CUSTOM.getValue().equals(info.getType())){
-            return "custom";
-        }
-        return "article";
+
+        return R.ok().put("article",info);
     }
 }

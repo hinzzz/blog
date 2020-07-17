@@ -46,7 +46,17 @@ public enum CodeEnum {
     /**
      * 文件上传异常
      */
-    UPLOAD_ERROR(40006);
+    UPLOAD_ERROR(40006),
+    /**
+     *点赞异常
+     */
+    GOODS_ERROR(40007),
+    /**
+     *收藏异常
+     */
+    COLLECTS_ERROR(40008);
+
+
 
     private int value;
 

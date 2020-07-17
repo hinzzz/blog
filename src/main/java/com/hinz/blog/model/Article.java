@@ -104,6 +104,21 @@ public class Article implements Serializable {
     private Integer type;
 
     /**
+     * 评论数
+     * */
+    private Long comments;
+
+    /**
+     * 点赞数
+     */
+    private Long likes;
+
+    /**
+     * 收藏数
+     */
+    private Long collects;
+
+    /**
      * 文章标签
      */
     @TableField(exist = false)

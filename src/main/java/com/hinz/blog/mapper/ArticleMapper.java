@@ -93,4 +93,28 @@ public interface ArticleMapper extends BaseMapper<Article> {
      */
     @Select("select * from blog_article where `status`=1 and `type`=0 order by id desc limit #{number}")
     List<Article> selectLatestArticle(int number);
+
+    /**
+     *  增加评论数
+     * @param id
+     * @return
+     */
+    @Update("update blog_article set comments=comments+1 were id = #{id}")
+    int updateForCommentsById(Long id);
+
+    /**
+     * 点赞
+     * @param articleId
+     * @return
+     */
+    @Update("update blog_article set likes=likes+#{operFlag} where id = #{articleId}")
+    int likes(Integer articleId,int operFlag);
+
+    /**
+     * 收藏
+     * @param articleId
+     * @return
+     */
+    @Update("update blog_article set collects=collects+#{operFlag} where id = #{articleId}")
+    int collects(Integer articleId,int operFlag);
 }

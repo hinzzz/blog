@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.common.constant.ConfigConst;
 import com.hinz.blog.common.util.IPUtils;
 import com.hinz.blog.common.util.Result;
+import com.hinz.blog.model.Article;
 import com.hinz.blog.model.enums.CommentStatusEnum;
+import com.hinz.blog.service.ArticleService;
 import com.hinz.blog.service.CommentService;
 import com.hinz.blog.service.ConfigService;
 import com.hinz.blog.model.Comment;
@@ -31,6 +33,9 @@ public class CommentController {
 
     @Autowired
     private ConfigService configService;
+
+    @Autowired
+    private ArticleService articleService;
 
     /**
      * 加载评论
@@ -69,6 +74,14 @@ public class CommentController {
         }else{
             comment.setStatus(CommentStatusEnum.PUBLISHED.getValue());
         }
-        return commentService.save(comment)?Result.success("评论成功"):Result.fail("评论失败");
+        boolean save = commentService.save(comment);
+        if(save){
+            //更新评论次数
+            int commentsResult = articleService.updateForCommentsById(comment.getArticle().getId());
+            if(commentsResult<=0){
+                return Result.fail("更新评论次数失败");
+            }
+        }
+        return save?Result.success("评论成功"):Result.fail("评论失败");
     }
 }
