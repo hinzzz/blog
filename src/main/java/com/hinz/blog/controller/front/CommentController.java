@@ -1,8 +1,11 @@
 package com.hinz.blog.controller.front;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.common.constant.ConfigConst;
+import com.hinz.blog.common.constant.Const;
 import com.hinz.blog.common.util.IPUtils;
+import com.hinz.blog.common.util.R;
 import com.hinz.blog.common.util.Result;
 import com.hinz.blog.model.Article;
 import com.hinz.blog.model.enums.CommentStatusEnum;
@@ -13,9 +16,7 @@ import com.hinz.blog.model.Comment;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -36,6 +37,17 @@ public class CommentController {
 
     @Autowired
     private ArticleService articleService;
+
+    @GetMapping()
+    public R list(@RequestParam(value = "articleUrl",required = true)String articleUrl,@RequestParam("current")Long current,@RequestParam("size")Long size){
+        articleUrl = articleUrl.substring(0,articleUrl.lastIndexOf("."));
+        Article article = articleService.findArticleByUrl(articleUrl);
+        if(article!=null && article.isComment()){
+            IPage<Comment> commentPage=commentService.findPageByArticleId(new Page<>(current, size),article.getId());
+            return R.ok().put("comment",commentPage);
+        }
+        return R.ok();
+    }
 
     /**
      * 加载评论
