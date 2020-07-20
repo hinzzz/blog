@@ -67,7 +67,7 @@ public class CommentController {
      * @return
      */
     @PostMapping("article")
-    public Result commentArticle(Comment comment, HttpServletRequest request){
+    public Result commentArticle(@RequestBody Comment comment, HttpServletRequest request){
         if(StringUtils.isBlank(comment.getContent())){
             return Result.fail("请输入评论内容");
         }
@@ -89,7 +89,7 @@ public class CommentController {
         boolean save = commentService.save(comment);
         if(save){
             //更新评论次数
-            int commentsResult = articleService.updateForCommentsById(comment.getArticle().getId());
+            int commentsResult = articleService.updateForCommentsById(comment.getArticleId());
             if(commentsResult<=0){
                 return Result.fail("更新评论次数失败");
             }

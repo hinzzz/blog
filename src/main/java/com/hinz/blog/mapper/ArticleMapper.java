@@ -99,7 +99,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      * @param id
      * @return
      */
-    @Update("update blog_article set comments=comments+1 were id = #{id}")
+    @Update("update blog_article set comments=comments+1 where id = #{id}")
     int updateForCommentsById(Long id);
 
     /**
