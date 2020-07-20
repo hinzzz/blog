@@ -1,17 +1,19 @@
-package com.atguigu.gmall.bean;
+package com.hinz.blog.model;
 
-import com.sun.javafx.beans.IDProperty;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.beans.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UmsMember implements Serializable {
+@Data
+@TableName("blog_member")
+public class BlogMember implements Serializable {
 
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Id
     private String id;
     private String memberLevelId;
     private String username;
@@ -27,12 +29,16 @@ public class UmsMember implements Serializable {
     private String job;
     private String personalizedSignature;
     private int sourceType;
-    private int integeration;
+    private int integration;
     private int growth;
     private int luckeyCount;
     private int historyIntegration;
+
+    @TableField(exist = false)
     private  String sourceUid;
+    @TableField(exist = false)
     private String accessToken;
+    @TableField(exist = false)
     private String accessCode;
 
     public String getSourceUid() {
@@ -57,35 +63,6 @@ public class UmsMember implements Serializable {
 
     public void setAccessCode(String accessCode) {
         this.accessCode = accessCode;
-    }
-
-    @Override
-    public String toString() {
-        return "UmsMember{" +
-                "id='" + id + '\'' +
-                ", memberLevelId='" + memberLevelId + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", phone='" + phone + '\'' +
-                ", status=" + status +
-                ", createTime=" + createTime +
-                ", icon='" + icon + '\'' +
-                ", gender=" + gender +
-                ", birthday=" + birthday +
-                ", city='" + city + '\'' +
-                ", job='" + job + '\'' +
-                ", personalizedSignature='" + personalizedSignature + '\'' +
-                ", sourceType=" + sourceType +
-                ", integeration=" + integeration +
-                ", growth=" + growth +
-                ", luckeyCount=" + luckeyCount +
-                ", historyIntegration=" + historyIntegration +
-                '}';
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setMemberLevelId(String memberLevelId) {
@@ -144,8 +121,8 @@ public class UmsMember implements Serializable {
         this.sourceType = sourceType;
     }
 
-    public void setIntegeration(int integeration) {
-        this.integeration = integeration;
+    public void setIntegration(int integration) {
+        this.integration = integration;
     }
 
     public void setGrowth(int growth) {
@@ -220,8 +197,8 @@ public class UmsMember implements Serializable {
         return sourceType;
     }
 
-    public int getIntegeration() {
-        return integeration;
+    public int getIntegration() {
+        return integration;
     }
 
     public int getGrowth() {

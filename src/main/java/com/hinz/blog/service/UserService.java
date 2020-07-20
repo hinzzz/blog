@@ -24,4 +24,6 @@ public interface UserService extends IService<User> {
      * @throws InvalidKeySpecException
      */
     Result login(String username, String password) throws NoSuchAlgorithmException, DecoderException, InvalidKeySpecException;
+
+
 }

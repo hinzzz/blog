@@ -1,12 +1,12 @@
-package com.atguigu.gmall.user.mapper;
+package com.hinz.blog.mapper;
 
-import com.atguigu.gmall.bean.UmsMember;
-import tk.mybatis.mapper.common.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hinz.blog.model.BlogMember;
 
 import java.util.List;
 
-public interface UserMapper extends Mapper<UmsMember>{
+public interface BlogUserMapper extends BaseMapper<BlogMember> {
 
-    List<UmsMember> selectAllUser();
+    List<BlogMember> selectAllUser();
 
 }
