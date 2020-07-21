@@ -46,10 +46,10 @@ mybatis-plus:
 
 
 
-githup:
+github:
   clientId: 4c8e5c108b41ce024f46
   clientSecret: 054f0ab71f8622081bfca2b583b35cb977fc90b6
   redirectUri: http://localhost:8081/authorize/redirect
   authorizeUrl: https://github.com/login/oauth/authorize?client_id=clientId&redirect_uri=redirectUri
   accesstokenUrl: https://github.com/login/oauth/access_token?client_id=clientId&client_secret=clientSecret&code=authorize_code
-  userUrl: https://api.github.com/user?access_token=accessToken
+  userUrl: https://api.github.com/user

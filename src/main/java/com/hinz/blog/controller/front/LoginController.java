@@ -1,9 +1,12 @@
 package com.hinz.blog.controller.front;
 
+import com.google.gson.Gson;
 import com.hinz.blog.common.util.OkHttpClientUtil;
 import com.hinz.blog.config.GitHubProperties;
+import com.hinz.blog.model.UserInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -17,16 +20,14 @@ import java.util.regex.Pattern;
  * @date ：Created in 2020/7/21 14:31
  */
 @Slf4j
+@Controller
 public class LoginController {
     @Autowired
     private GitHubProperties gitHubProperties;
 
-    /**
-     * @param code
-     * @author xiaofu
-     * @description 授权回调
-     * @date 2020/7/10 15:42
-     */
+    @Autowired
+    private Gson gson;
+
     @RequestMapping("/authorize/redirect")
     public ModelAndView authorize(@NotEmpty String code) {
 
@@ -35,7 +36,7 @@ public class LoginController {
         /**
          * 重新到前端主页
          */
-        String redirectHome = "http://47.93.6.5/home";
+        String redirectHome = "http://localhost:8080";
 
         try {
             /**
@@ -64,13 +65,13 @@ public class LoginController {
             /**
              * 成功获取token后，开始请求用户信息
              */
-            String userInfoUrl = gitHubProperties.getUserUrl().replace("accessToken", accessToken);
+            String userInfoUrl = gitHubProperties.getUserUrl();
 
-            String userResult = OkHttpClientUtil.sendByGetUrl(userInfoUrl);
+            String userResult = OkHttpClientUtil.sendTokenToGitHub(userInfoUrl,accessToken);
 
             log.info("用户信息：{}", userResult);
 
-            UserInfo userInfo = JSON.parseObject(userResult, UserInfo.class);
+            UserInfo userInfo = gson.fromJson(userResult, UserInfo.class);
 
             redirectHome += "?name=" + userInfo.getName();
 

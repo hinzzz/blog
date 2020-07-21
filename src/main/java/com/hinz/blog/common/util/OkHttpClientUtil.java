@@ -27,4 +27,22 @@ public class OkHttpClientUtil {
         }
         return null;
     }
+    public static String sendTokenToGitHub(String url,String accessToken) {
+        String result;
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
+        Request request = new Request.Builder().url(url).addHeader("Authorization","token "+accessToken).build();
+        Response response;
+        try {
+            response = client.newCall(request).execute();
+            assert response.body() != null;
+            result = response.body().string();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
