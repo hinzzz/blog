@@ -16,4 +16,4 @@ logging:
   level:
     com:
       hinz:
-        blog: debug
+        blog: info

@@ -5,9 +5,11 @@ import com.hinz.blog.common.util.OkHttpClientUtil;
 import com.hinz.blog.config.GitHubProperties;
 import com.hinz.blog.model.UserInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -29,7 +31,7 @@ public class LoginController {
     private Gson gson;
 
     @RequestMapping("/authorize/redirect")
-    public ModelAndView authorize(@NotEmpty String code) {
+    public ModelAndView authorize(@NotEmpty String code, @RequestParam(value = "redirectUrl",required = false)String redirectUrl) {
 
         log.info("授权码code: {}", code);
 
@@ -73,8 +75,11 @@ public class LoginController {
 
             UserInfo userInfo = gson.fromJson(userResult, UserInfo.class);
 
-            redirectHome += "?name=" + userInfo.getName();
-
+            if(StringUtils.isBlank(redirectUrl)){
+                redirectHome += "?name=" + userInfo.getLogin();
+            }else{
+                redirectHome = redirectUrl+"?"+userInfo.getLogin();
+            }
         } catch (Exception e) {
             log.error("授权回调异常={}", e);
         }
