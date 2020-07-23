@@ -21,7 +21,9 @@ public enum CommentStatusEnum {
     /**
      * 已删除
      */
-    RECYCLE(2, "已删除");
+    RECYCLE(2, "已删除"),
+
+    UPDATE_COMMENT_COUNT(3,"更新评论次数失败");
 
     private int value;
     private String desc;

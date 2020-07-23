@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,8 +53,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .map(replyComment -> {
                     replyComment.setComments(getReplyComments(replyComment, allComments));
                     return replyComment;
-                }).sorted((c1, c2) -> {
-                    return (c1.getCreateTime() == null ? 0 : c1.getCreateTime().getTimezoneOffset()) - (c2.getCreateTime() == null ? 0 : c2.getCreateTime().getTimezoneOffset());
+                }).sorted((c2, c1) -> {
+                    long result = (c1.getCreateTime() == null ? 0 : c1.getCreateTime().getTime()) - (c2.getCreateTime() == null ? 0 : c2.getCreateTime().getTime());
+                    return Integer.valueOf(result+"");
                 }).collect(Collectors.toList());
         return replyComments;
     }

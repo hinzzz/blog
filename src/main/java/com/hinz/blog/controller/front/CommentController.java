@@ -67,9 +67,9 @@ public class CommentController {
      * @return
      */
     @PostMapping("article")
-    public Result commentArticle(@RequestBody Comment comment, HttpServletRequest request){
+    public R commentArticle(@RequestBody Comment comment, HttpServletRequest request){
         if(StringUtils.isBlank(comment.getContent())){
-            return Result.fail("请输入评论内容");
+            return R.error("请输入评论内容");
         }
         if(StringUtils.isBlank(comment.getAuthor())){
             comment.setAuthor("匿名用户");
@@ -91,9 +91,9 @@ public class CommentController {
             //更新评论次数
             int commentsResult = articleService.updateForCommentsById(comment.getArticleId());
             if(commentsResult<=0){
-                return Result.fail("更新评论次数失败");
+                return R.error("更新评论次数失败");
             }
         }
-        return save?Result.success("评论成功"):Result.fail("评论失败");
+        return save?R.ok().put("comment",comment):R.error("评论失败");
     }
 }
