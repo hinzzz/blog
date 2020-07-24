@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.model.Comment;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -39,4 +41,8 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * @return
      */
     Comment selectCommentById(Long id);
+
+    @Select("select *from blog_comment where id=#{id}")
+    @ResultType(Comment.class)
+    Comment findCommentById(Long id);
 }

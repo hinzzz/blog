@@ -8,10 +8,12 @@ import com.hinz.blog.mapper.CommentMapper;
 import com.hinz.blog.model.enums.CommentStatusEnum;
 import com.hinz.blog.service.CommentService;
 import com.hinz.blog.model.Comment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,9 @@ import java.util.stream.Collectors;
 @Service
 @CacheConfig(cacheNames = "comment")
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements CommentService {
+
+    @Resource
+    private CommentMapper commentMapper;
 
     @Override
     public IPage<Comment> findPageByArticleId(Page<Comment> page,Long articleId) {
@@ -73,6 +78,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public Comment findCommentById(Long id) {
-        return baseMapper.selectCommentById(id);
+        return commentMapper.findCommentById(id);
     }
 }

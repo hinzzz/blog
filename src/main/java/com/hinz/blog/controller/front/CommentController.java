@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,11 +89,14 @@ public class CommentController {
         }
         boolean save = commentService.save(comment);
         if(save){
+
             //更新评论次数
             int commentsResult = articleService.updateForCommentsById(comment.getArticleId());
             if(commentsResult<=0){
                 return R.error("更新评论次数失败");
             }
+            comment = commentService.findCommentById(comment.getId());
+            comment.setComments(new ArrayList<>());
         }
         return save?R.ok().put("comment",comment):R.error("评论失败");
     }
