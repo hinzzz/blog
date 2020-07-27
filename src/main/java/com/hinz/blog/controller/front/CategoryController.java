@@ -34,6 +34,6 @@ public class CategoryController extends BaseController {
 
     @GetMapping
     public R list(){
-        return R.ok().put("category",categoryService.list());
+        return R.ok().put("category",categoryService.findAllCategory());
     }
 }

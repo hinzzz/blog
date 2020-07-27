@@ -14,6 +14,8 @@
         </template>
       </el-table-column>
 
+      <el-table-column align="center" label="分类描述" min-width="100" prop="description"/>
+
       <el-table-column width="200" align="center" label="操作">
         <template slot-scope="scope">
           <el-button size="mini" icon="el-icon-edit" type="primary" @click="addOrUpdateHandle(scope.row.id)">修改

@@ -10,6 +10,9 @@
       <el-form-item label="分类链接" prop="url">
         <el-input v-model="dataForm.url" placeholder="请输入分类链接"/>
       </el-form-item>
+      <el-form-item label="分类描述" prop="description">
+        <el-input v-model="dataForm.description" placeholder="请输入分类描述"/>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>

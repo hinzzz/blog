@@ -6,6 +6,9 @@ import com.hinz.blog.service.CategoryService;
 import com.hinz.blog.model.Category;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 /**
  * 分类服务实现类
  * @author hinz
@@ -13,5 +16,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
+
+
+    @Resource
+    private CategoryMapper categoryMapper;
+
+    @Override
+    public List<Category> findAllCategory() {
+        return categoryMapper.findAllCategory();
+    }
 
 }
