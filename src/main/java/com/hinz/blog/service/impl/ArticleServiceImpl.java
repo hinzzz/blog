@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hinz.blog.mapper.ArticleMapper;
 import com.hinz.blog.service.ArticleService;
 import com.hinz.blog.model.Article;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author hinz
  * @since 2020-07-13
  */
+@Slf4j
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
@@ -28,6 +30,17 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             baseMapper.updateForVisitsById(article.getId());
         }
         return article;
+    }
+
+    @Override
+    public IPage<Article> findPageByUrl(Page<Article> page, String url) {
+        try {
+            page.setDesc("id");
+            return baseMapper.findPageByUrl(page,url);
+        }catch (Exception e){
+            log.error("查询文章失败",e);
+        }
+        return null;
     }
 
     @Override

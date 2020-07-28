@@ -34,4 +34,6 @@ public interface ConfigService extends IService<Config> {
      * @param clazz  Object对象
      */
     <T> T getConfigObject(String name, Class<T> clazz);
+
+    String getConfigByName(String name);
 }

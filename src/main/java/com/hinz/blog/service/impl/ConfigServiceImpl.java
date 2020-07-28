@@ -60,4 +60,9 @@ public class ConfigServiceImpl extends ServiceImpl<ConfigMapper, Config> impleme
             throw new BlogException("获取参数失败");
         }
     }
+
+    @Override
+    public String getConfigByName(String name) {
+        return baseMapper.selectConfigByName(name);
+    }
 }

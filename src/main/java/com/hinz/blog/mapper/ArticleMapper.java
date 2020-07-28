@@ -1,6 +1,7 @@
 package com.hinz.blog.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.model.Article;
 import org.apache.ibatis.annotations.Param;
@@ -117,4 +118,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
      */
     @Update("update blog_article set collects=collects+#{operFlag} where id = #{articleId}")
     int collects(Integer articleId,int operFlag);
+
+
+    Page<Article> findPageByUrl(Page page, String url);
 }

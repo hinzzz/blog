@@ -58,4 +58,15 @@
   <select id="selectListByCategory" resultMap="BaseResultMap">
     SELECT a.id,a.title,a.description,a.image,a.is_top,a.create_time,a.url,b.name AS category_name,b.url AS category_url FROM blog_article a LEFT JOIN blog_category b ON a.category_id=b.id WHERE a.status=1 and a.type=0 AND a.category_id=#{categoryId}
   </select>
+
+
+  <select id="findPageByUrl" resultMap="BaseResultMap">
+    select a.id,a.title,a.description,a.image,a.is_top,a.create_time,a.url,a.comments,a.likes,a.collects,a.visits,c.name AS category_name,c.url AS category_url  from blog_article a
+    left join blog_category c on c.id = a.category_id
+    where a.status = 1
+    <if test="url!=null">
+    and  a.category_id = (select id from blog_category where url=#{url})
+    </if>
+
+  </select>
 </mapper>

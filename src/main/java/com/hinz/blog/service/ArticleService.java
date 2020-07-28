@@ -23,6 +23,14 @@ public interface ArticleService extends IService<Article> {
     Article findArticleByUrl(String url);
 
     /**
+     * 根据链接获取文章 分页
+     * @param page
+     * @param url
+     * @return
+     */
+    IPage<Article> findPageByUrl(Page<Article> page, String url);
+
+    /**
      * 获得所有置顶文章
      * @return 文章集合
      */
