@@ -8,6 +8,8 @@ import com.hinz.blog.common.exception.BlogException;
 import com.hinz.blog.common.util.R;
 import com.hinz.blog.model.enums.ArticleTypeEnum;
 import com.hinz.blog.model.enums.LinkTypeEnum;
+import com.hinz.blog.service.ArticleService;
+import com.hinz.blog.service.CommentService;
 import com.hinz.blog.service.LinkService;
 import com.hinz.blog.service.TagService;
 import com.hinz.blog.model.Article;
@@ -27,49 +29,21 @@ import java.util.List;
  * @author hinz
  * @date 2020-07-13
  */
-@Controller
-public class IndexController extends BaseController {
+@RestController
+public class IndexController {
 
     @Autowired
     private LinkService linkService;
 
     @Autowired
     private TagService tagService;
-    /**
-     * 首页
-     * @return
-     */
-    @GetMapping("/")
-    public String index(Model model) {
-        return index(model,1);
-    }
 
-    /**
-     * 首页分页
-     * @param pageIndex 需要加载的页码
-     * @return
-     */
-    @GetMapping("/page/{pageIndex}")
-    public String index(Model model,@PathVariable(value = "pageIndex") Integer pageIndex) {
-        if(pageIndex==1){
-            List<Article> topArticles = articleService.findAllTopArticles();
-            model.addAttribute("top",topArticles);
-        }
-        IPage<Article> page=articleService.findPageByKeyword(new Page<>(pageIndex, Const.PAGE_SIZE),null);
-        model.addAttribute("page",page);
-        // 热门文章
-        List<Article> hotArticles=articleService.findHotArticles(Const.HOT_ARTICLE_SIZE);
-        model.addAttribute("hotArticles", hotArticles);
-        // 热门标签
-        model.addAttribute("hotTags", tagService.findHotTags(Const.HOT_TAG_SIZE));
-        // 友情链接
-        model.addAttribute("friendLinks", linkService.findLinkByType(LinkTypeEnum.FRIEND_LINK.getValue()));
-        // 个人链接
-        model.addAttribute("personalLinks", linkService.findLinkByType(LinkTypeEnum.PERSONAL_LINK.getValue()));
-        //分页代码
-        model.addAttribute("pageHtml",pagination((int)page.getCurrent(),(int)page.getPages(), "/page/"));
-        return "index";
-    }
+    @Autowired
+    private ArticleService articleService;
+
+    @Autowired
+    private CommentService commentService;
+
 
     /**
      * 文章详情页

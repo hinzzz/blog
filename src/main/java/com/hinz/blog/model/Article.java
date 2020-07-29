@@ -131,6 +131,11 @@ public class Article implements Serializable {
     private Category category;
 
     /**
+     * 作者
+     */
+    private String author;
+
+    /**
      * 获得文章关键字
      * @return
      */

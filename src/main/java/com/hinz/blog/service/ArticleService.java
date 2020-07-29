@@ -28,7 +28,7 @@ public interface ArticleService extends IService<Article> {
      * @param url
      * @return
      */
-    IPage<Article> findPageByUrl(Page<Article> page, String url);
+    IPage<Article> findPageByUrl(Page<Article> page, String url,String q);
 
     /**
      * 获得所有置顶文章

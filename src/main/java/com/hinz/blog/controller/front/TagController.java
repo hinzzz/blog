@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("tag")
-public class TagController extends BaseController {
+public class TagController {
 
     @Autowired
     private TagService tagService;
@@ -45,10 +45,10 @@ public class TagController extends BaseController {
      * 获得指定标签下的文章
      * @return
      */
-    @GetMapping("{url}")
-    public String tag(Model model,@PathVariable(value = "url") String url) {
-        return tag(model,url,1);
-    }
+//    @GetMapping("{url}")
+//    public String tag(Model model,@PathVariable(value = "url") String url) {
+//        return tag(model,url,1);
+//    }
 
     /**
      *
@@ -57,17 +57,17 @@ public class TagController extends BaseController {
      * @param pageIndex 需要加载的页码
      * @return
      */
-    @GetMapping("{url}/{pageIndex}")
-    public String tag(Model model,@PathVariable(value = "url") String url,@PathVariable(value = "pageIndex") Integer pageIndex) {
-        Tag tag=tagService.getOne(new QueryWrapper<Tag>().eq("url",url));
-        if(null==tag){
-            throw new BlogException(CodeEnum.NOT_FOUND.getValue(),"标签不存在："+url);
-        }
-        IPage<Article> page=articleService.findPageByTag(new Page<>(pageIndex, Const.PAGE_SIZE),tag.getId());
-        model.addAttribute("info",tag);
-        model.addAttribute("page",page);
-        //分页代码
-        model.addAttribute("pageHtml",pagination((int)page.getCurrent(),(int)page.getPages(), "/tag/"+url+"/"));
-        return "list";
-    }
+//    @GetMapping("{url}/{pageIndex}")
+//    public String tag(Model model,@PathVariable(value = "url") String url,@PathVariable(value = "pageIndex") Integer pageIndex) {
+//        Tag tag=tagService.getOne(new QueryWrapper<Tag>().eq("url",url));
+//        if(null==tag){
+//            throw new BlogException(CodeEnum.NOT_FOUND.getValue(),"标签不存在："+url);
+//        }
+//        IPage<Article> page=articleService.findPageByTag(new Page<>(pageIndex, Const.PAGE_SIZE),tag.getId());
+//        model.addAttribute("info",tag);
+//        model.addAttribute("page",page);
+//        //分页代码
+//        model.addAttribute("pageHtml",pagination((int)page.getCurrent(),(int)page.getPages(), "/tag/"+url+"/"));
+//        return "list";
+//    }
 }

@@ -20,8 +20,11 @@ public class ArticleController {
     protected ArticleService articleService;
 
     @GetMapping()
-    public R list(@RequestParam(value = "current") Integer current, @RequestParam(value = "size") Integer size,@RequestParam(value="cat",required = false)String cat){
-        IPage<Article> page=articleService.findPageByUrl(new Page<>(current, size),cat);
+    public R list(@RequestParam(value = "current") Integer current,
+                  @RequestParam(value = "size") Integer size,
+                  @RequestParam(value="cat",required = false)String cat,
+                  @RequestParam(value="q",required = false)String q){
+        IPage<Article> page=articleService.findPageByUrl(new Page<>(current, size),cat,q);
         return R.ok().put("page",page);
     }
 

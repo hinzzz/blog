@@ -120,5 +120,5 @@ public interface ArticleMapper extends BaseMapper<Article> {
     int collects(Integer articleId,int operFlag);
 
 
-    Page<Article> findPageByUrl(Page page, String url);
+    Page<Article> findPageByUrl(Page page, String url,String q);
 }

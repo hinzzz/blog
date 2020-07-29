@@ -33,11 +33,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public IPage<Article> findPageByUrl(Page<Article> page, String url) {
+    public IPage<Article> findPageByUrl(Page<Article> page, String url,String q) {
         try {
             page.setDesc("id");
-            return baseMapper.findPageByUrl(page,url);
+            return baseMapper.findPageByUrl(page,url,q);
         }catch (Exception e){
+            e.printStackTrace();
             log.error("查询文章失败",e);
         }
         return null;
