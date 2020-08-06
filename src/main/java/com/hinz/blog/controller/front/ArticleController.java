@@ -24,8 +24,7 @@ public class ArticleController {
     @Autowired
     protected ArticleService articleService;
 
-    @Autowired
-    private CommentService commentService;
+
 
     @GetMapping()
     public R list(@RequestParam(value = "current") Integer current,
@@ -46,29 +45,5 @@ public class ArticleController {
         return articleService.collects(articleId,operFlag)>=0?R.ok(): R.error(CodeEnum.COLLECTS_ERROR.getValue(),"收藏失败");
     }
 
-    /**
-     * 文章详情页
-     * @return
-     */
-    @ResponseBody
-    @GetMapping("{url}.html")
-    public R index(Model model, @PathVariable(value = "url") String url) {
-        Article info=articleService.findArticleByUrl(url);
-        if(null==info){
-            throw new BlogException(CodeEnum.NOT_FOUND.getValue(),"文章不存在："+url);
-        }
-        model.addAttribute("info",info);
-        //查询当前文章的第一页评论
-        if(info.isComment()){
-            IPage<Comment> commentPage=commentService.findPageByArticleId(new Page<>(1, Const.COMMENT_SIZE),info.getId());
-            model.addAttribute("comments",commentPage);
-        }
-        //上一篇和下一篇
-        Article previousArticle=articleService.findPreviousById(info.getId());
-        model.addAttribute("previousArticle",previousArticle);
-        Article nextArticle=articleService.findNextById(info.getId());
-        model.addAttribute("nextArticle",nextArticle);
 
-        return R.ok().put("article",info);
-    }
 }
