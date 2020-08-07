@@ -14,3 +14,8 @@ logging:
     com:
       hinz:
         blog: info
+
+
+
+server:
+  port: 80

@@ -7,3 +7,6 @@ spring:
     url: jdbc:mysql://47.98.138.29:3306/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8&useSSL=true&autoReconnect=true
     username: root
     password: 123456
+
+server:
+  port: 8081
