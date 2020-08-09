@@ -64,6 +64,7 @@ public class ApiArticleController {
             article.setUrl(article.getTitle());
         }
         article.setUpdateTime(new Date());
+        article.setAuthor("hinz");
         boolean res=articleService.saveOrUpdate(article);
         if(!res){
             return Result.fail("保存失败");
