@@ -114,4 +114,6 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     int collects(Integer articleId,Integer operFlag);
+
+    boolean saveCustom(Article article);
 }
