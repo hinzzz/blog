@@ -64,7 +64,7 @@ public class ApiArticleController {
             article.setUrl(article.getTitle());
         }
         article.setUpdateTime(new Date());
-        boolean res=articleService.saveOrUpdate(article);
+        boolean res=articleService.saveCustom(article);
         if(!res){
             return Result.fail("保存失败");
         }

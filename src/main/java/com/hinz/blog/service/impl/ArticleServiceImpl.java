@@ -11,7 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 文章服务实现类
@@ -127,5 +129,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             return baseMapper.collects(articleId,oper);
         }
         return 0;
+    }
+
+    @Override
+    public boolean saveCustom(Article article) {
+        //提取目录
+        Set<String> catalogs = new HashSet<>();
+        catalogs.add("h1");
+        catalogs.add("h2");
+        catalogs.add("h3");
+        catalogs.add("h4");
+        catalogs.add("h5");
+        catalogs.add("h6");
+
+
+        return saveOrUpdate(article);
     }
 }
