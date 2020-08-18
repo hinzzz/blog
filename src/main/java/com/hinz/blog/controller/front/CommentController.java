@@ -41,7 +41,6 @@ public class CommentController {
 
     @GetMapping()
     public R list(@RequestParam(value = "articleUrl",required = true)String articleUrl,@RequestParam("current")Long current,@RequestParam("size")Long size){
-        articleUrl = articleUrl.substring(0,articleUrl.lastIndexOf("."));
         Article article = articleService.findArticleByUrl(articleUrl);
         if(article!=null && article.isComment()){
             IPage<Comment> commentPage=commentService.findPageByArticleId(new Page<>(current, size),article.getId());

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="boss2" default="pack">
+	<property name="tarForBlog" value="tarForBlog" />
+	<property name="Web" value="./target/blog" />
+	<property name="appName" value="boss2" />
+	<property name="source" value="1.5" />
+	<property name="target" value="1.5" />
+	<property name="app.dir" value="." />
+
+
+	<path id="boss2.classpath">
+		<fileset dir="${app.dir}/target/blog/WEB-INF/lib/">
+		</fileset>
+	</path>
+
+	<target name="init">
+		<tstamp>
+			<format property="TODAY" pattern="yyyyMMdd" locale="cn" />
+		</tstamp>
+		<delete dir="${tarForBlog}" />
+		<mkdir dir="${tarForBlog}" />
+		<echo>${appName} ${TODAY}</echo>
+	</target>
+	<target name="packStatic" depends="init">
+		<!--<tar destfile="${tarForBlog}/${appName}-${TODAY}.tar">
+			<tarfileset dir="${Web}">-->
+		<zip destfile="${tarForBlog}/${appName}-${TODAY}.zip">
+			<zipfileset dir="${Web}">
+
+				<include name="WEB-INF/classes/banner.txt"/>
+
+
+			</zipfileset>
+		</zip>
+	</target>
+
+	<target name="clean">
+		<delete dir="${tarForBlog}" />
+		<mkdir dir="${tarForBlog}" />
+	</target>
+
+	<target name="pack" depends="packStatic" />
+
+	<target name="all" depends="clean,packStatic" />
+
+
+</project>
