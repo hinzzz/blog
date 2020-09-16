@@ -136,6 +136,11 @@ public class Article implements Serializable {
     private String author;
 
     /**
+     * 目录
+     */
+    private String catalogue;
+
+    /**
      * 获得文章关键字
      * @return
      */

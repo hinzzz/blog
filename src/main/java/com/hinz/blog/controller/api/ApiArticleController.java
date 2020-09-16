@@ -65,6 +65,7 @@ public class ApiArticleController {
         }
         article.setUpdateTime(new Date());
         article.setAuthor("hinz");
+        article.setCatalogue(articleService.generateCatalogue(article.getContent()));
         boolean res=articleService.saveOrUpdate(article);
 
         if(!res){

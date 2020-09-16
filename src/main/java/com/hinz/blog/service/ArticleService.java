@@ -115,5 +115,10 @@ public interface ArticleService extends IService<Article> {
      */
     int collects(Integer articleId,Integer operFlag);
 
-    boolean saveCustom(Article article);
+    /**
+     * 生成目录
+     * @param content
+     * @return
+     */
+    String generateCatalogue(String content);
 }
