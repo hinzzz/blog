@@ -13,7 +13,7 @@ public class Catalogue {
     /**
      * 等级
      */
-    private Integer leve;
+    private Integer level;
     /**
      * 标题内容
      */

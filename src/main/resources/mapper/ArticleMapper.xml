@@ -23,6 +23,7 @@
     <result column="source_url" property="sourceUrl" />
     <result column="category_id" property="categoryId" />
     <result column="author" property="author" />
+    <result column="catalogue" property="catalogue" />
     <association property="category" javaType="Category">
       <id property="id" column="category_id"/>
       <result property="name" column="category_name"/>
@@ -32,7 +33,7 @@
   </resultMap>
 
   <select id="selectArticleByUrl" resultMap="BaseResultMap">
-    SELECT a.id,a.visits,a.title,a.is_original,a.source_url,a.description,a.is_comment,a.content,a.create_time,a.update_time,a.url,a.status,a.type,a.likes,a.collects,a.comments,a.author ,  b.name AS category_name,b.url AS category_url FROM blog_article a LEFT JOIN blog_category b ON a.category_id=b.id WHERE a.url=#{url} AND a.status = 1
+    SELECT a.id,a.visits,a.title,a.is_original,a.source_url,a.description,a.is_comment,a.content,a.create_time,a.update_time,a.url,a.status,a.type,a.likes,a.collects,a.comments,a.author ,  b.name AS category_name,b.url AS category_url,a.catalogue FROM blog_article a LEFT JOIN blog_category b ON a.category_id=b.id WHERE a.url=#{url} AND a.status = 1
   </select>
 
   <select id="selectTopArticles" resultMap="BaseResultMap">
