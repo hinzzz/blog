@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  rabbitmq:
+    hostname: localhost #这个必须设置 否则持久化的消息在容器重启后就会丢失，原因是rabbitmq认主机名，主机名不同，则之前的数据不会读取
+    restart: always
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 61613:61613
+    environment:
+      TZ: Asia/Shanghai
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: 123456
+    volumes:
+      - ./data:/var/lib/rabbitmq
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+
+
+#[rabbitmq_management,rabbitmq_tracing,rabbitmq_stomp].
+
+
+
+
+

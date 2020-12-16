@@ -1,17 +1,13 @@
 package com.hinz.blog.controller.front;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hinz.blog.common.constant.CodeEnum;
-import com.hinz.blog.common.constant.Const;
-import com.hinz.blog.common.exception.BlogException;
 import com.hinz.blog.common.util.R;
 import com.hinz.blog.model.Article;
-import com.hinz.blog.model.Comment;
 import com.hinz.blog.service.ArticleService;
-import com.hinz.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,6 +19,13 @@ public class ArticleController {
 
     @Autowired
     protected ArticleService articleService;
+
+
+    @PostMapping("/test")
+    public R test(@RequestBody String json){
+        Article article = JSONObject.parseObject(json, Article.class);
+        return R.ok().put("data",article);
+    }
 
 
 

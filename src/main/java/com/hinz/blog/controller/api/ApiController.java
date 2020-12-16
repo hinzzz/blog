@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +38,7 @@ public class ApiController {
      * @return
      */
     @PostMapping(value = "login")
-    public Result login(User user, HttpSession session) throws Exception {
+    public Result login(@RequestBody User user, HttpSession session) throws Exception {
         //检查是否重复登录
         if(null!=session.getAttribute(Const.USER_SESSION_KEY)){
             return Result.success("已登录",session.getId());
